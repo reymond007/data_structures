@@ -1,0 +1,59 @@
+
+public class Solution 
+{
+	
+	public class Entry
+	{
+		int key;
+		int value;
+		
+		public Entry(int k, int v)
+		{
+			key = k;
+			value = v;
+		}
+	}
+	
+	public class HashMap
+	{
+		int size;
+		Entry[] map;
+		
+		public HashMap(int size)
+		{
+			this.size = size;
+			map = new Entry[size];
+		}
+		
+		public int get(int key)
+		{
+			int hash = key%size;
+			
+			while(map[hash] != null && map[hash].key != key)
+			{
+				hash = (hash+1)%size;
+			}
+			
+			if(map[hash] == null)
+			{
+				return -1;
+			}
+			else
+			{
+				return map[hash].value;
+			}
+		}
+		
+		public void put (int key, int value)
+		{
+			int hash = key%size;
+			
+			while(map[hash] != null && map[hash].key != key)
+			{
+				hash = (hash+1)%size;
+			}
+			
+			map[hash] = new Entry(key,value);
+		}
+	}
+}
